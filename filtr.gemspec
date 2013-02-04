@@ -8,9 +8,9 @@ Gem::Specification.new do |gem|
   gem.version       = Filtr::VERSION
   gem.authors       = ["Hck"]
   gem.email         = ["alexsvirin@gmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
+  gem.description   = %q{Gem for easy records filtering}
   gem.summary       = %q{TODO: Write a gem summary}
-  gem.homepage      = ""
+  gem.homepage      = "http://github.com/hck/filtr"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }

@@ -148,7 +148,7 @@ describe ARPost do
     sample.each{|r| r.update_attribute(:title, nil)}
 
     filter = Filtr::Filter.create do
-      field :title,  :present
+      field :title,  :presents
     end
     filter.title = false
 

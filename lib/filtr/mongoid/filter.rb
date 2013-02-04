@@ -8,7 +8,7 @@ module Filtr
 
         conditions.inject(nil) do |res,condition|
           res ? res.instance_eval(&condition) : instance_eval(&condition)
-        end
+        end || self
       end
     end
   end

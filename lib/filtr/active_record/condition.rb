@@ -45,7 +45,7 @@ module Filtr
         raise NotImplementedError, "all operator is not available for ActiveRecord"
       end
 
-      def present(obj)
+      def presents(obj)
         obj.where("(#{field_name} IS NOT NULL) = ?", value)
       end
     end

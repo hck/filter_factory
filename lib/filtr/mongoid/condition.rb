@@ -44,6 +44,10 @@ module Filtr
       def exists(obj)
         obj.where(field_name => {'$exists' => value})
       end
+
+      def presents(obj)
+        ['true', '1', 1].include?(value) ? obj.where(field_name => {'$nin' => [nil, '', []]}) : obj.where(field_name => {'$in' => [nil, '', []]})
+      end
     end
   end
 end

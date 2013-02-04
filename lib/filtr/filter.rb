@@ -19,13 +19,14 @@ module Filtr
     end
 
     def attributes=(attributes = {})
+      return unless attributes
       attributes.each do |name, value|
         public_send("#{name}=", value)
       end
     end
 
     def filled_fields
-      fields.select{|f| !f.value.nil?}
+      fields.select{|f| !f.value.blank?}
     end
 
     def persisted?

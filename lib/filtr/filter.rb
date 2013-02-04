@@ -2,7 +2,8 @@ require 'active_model'
 
 module Filtr
   class Filter
-    include ::ActiveModel
+    include ActiveModel::Conversion
+    extend ActiveModel::Naming
 
     attr_reader :fields
 
@@ -10,8 +11,25 @@ module Filtr
       @fields = []
     end
 
+    def attributes
+      @fields.inject(HashWithIndifferentAccess.new) do |acc,field|
+        acc[field.name] = field.value
+        acc
+      end
+    end
+
+    def attributes=(attributes = {})
+      attributes.each do |name, value|
+        public_send("#{name}=", value)
+      end
+    end
+
     def filled_fields
       fields.select{|f| !f.value.nil?}
+    end
+
+    def persisted?
+      false
     end
 
     private
@@ -22,18 +40,6 @@ module Filtr
 
         @fields << field
       end
-    end
-
-    def to_class(name)
-      name_parts = name.split('::')
-      name_parts.shift if name_parts.empty? || name_parts.first.empty?
-
-      constant = Object
-      name_parts.each do |name|
-        constant = constant.const_defined?(name) ? constant.const_get(name) : constant.const_missing(name)
-      end
-
-      constant
     end
 
     class << self

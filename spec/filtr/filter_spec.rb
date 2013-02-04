@@ -41,6 +41,35 @@ describe Filtr::Filter do
     filter.fields.first.value.should == "sample name"
   end
 
+  it "should respond_to attributes & attributes= methods" do
+    filter = described_class.create do
+      field :name, :eq
+    end
+
+    filter.should respond_to(:attributes, :attributes=)
+  end
+
+  it "should return valid attributes" do
+    filter = described_class.create do
+      field :name, :eq
+      field :surname, :regex
+    end
+    filter.name = "test name"
+
+    filter.attributes.should == HashWithIndifferentAccess.new({name: "test name", surname: nil})
+  end
+
+  it "should fill filter values from hash" do
+    filter = described_class.create do
+      field :name, :eq
+      field :surname, :regex
+    end
+
+    attributes = {name: "my test name", surname: "surname here"}
+    filter.attributes = attributes
+    filter.attributes.should == HashWithIndifferentAccess.new(attributes)
+  end
+
   #describe "#conditions" do
   #  it "should return result of query method for each of the condition as a Method object" do
   #    filter = described_class.create do

@@ -18,7 +18,44 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+1. Describe your filter:
+
+    @filter = Filtr::Filter.create do
+      # filter field definition: field name for ActiveRecord/Mongoid model, filter type
+      field :title, :regex
+      field :author, :eq
+      field :views, :gte
+      # ...
+    end
+
+2. Render form as you want in your view:
+
+    <%= form_for @filter, as: :filter do |f| %>
+    <div>
+        <%= f.label :title %>
+        <br/>
+        <%= f.text_field %>
+    </div>
+    <div>
+        <%= f.label :author %>
+        <br/>
+        <%= f.select Author.all.map{|r| [r.name, r.id]} %>
+    </div>
+    <div>
+        <%= f.label :views %>
+        <br/>
+        <%= f.number_field :views %>
+    </div>
+    <div class="actions">
+        <%= f.submit "Filter" %>
+    </div>
+    <% end %>
+
+3. Filter your models in controller:
+
+    @filter.attributes(params[:filter]) # update filter with values supplied from the form
+
+    @posts = Post.filter(@filter) # fetch records that match specified filters
 
 ## Contributing
 

@@ -7,7 +7,7 @@ module Filtr
         end
 
         conditions.inject(nil) do |res,condition|
-          res = res ? res.instance_eval(&condition) : instance_eval(&condition)
+          res ? res.instance_eval(&condition) : instance_eval(&condition)
         end
       end
     end

@@ -18,7 +18,7 @@ Or install it yourself as:
 
 ## Usage
 
-1. Describe your filter:
+Describe your filter:
 
     @filter = Filtr::Filter.create do
       # filter field definition: field name for ActiveRecord/Mongoid model, filter type
@@ -28,7 +28,7 @@ Or install it yourself as:
       # ...
     end
 
-2. Render form as you want in your view:
+Render form as you want in your view:
 
     <%= form_for @filter, as: :filter do |f| %>
     <div>
@@ -51,7 +51,7 @@ Or install it yourself as:
     </div>
     <% end %>
 
-3. Filter your models in controller:
+Filter your models in controller:
 
     @filter.attributes(params[:filter]) # update filter with values supplied from the form
 

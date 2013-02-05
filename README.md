@@ -1,6 +1,6 @@
 # FilterFactory
 
-Filtr allows you to easily fetch ActiveRecord/Mongoid models that match specified filters.
+FilterFactory allows you to easily fetch ActiveRecord/Mongoid models that match specified filters.
 
 ## Installation
 

@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in filtr.gemspec
+# Specify your gem's dependencies in filter_factory.gemspec
 gemspec
 
 gem 'rails', '>= 3.0'

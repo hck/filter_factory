@@ -1,4 +1,4 @@
-# Filtr
+# FilterFactory
 
 Filtr allows you to easily fetch ActiveRecord/Mongoid models that match specified filters.
 
@@ -6,7 +6,7 @@ Filtr allows you to easily fetch ActiveRecord/Mongoid models that match specifie
 
 Add this line to your application's Gemfile:
 
-    gem 'filtr'
+    gem 'filter_factory'
 
 And then execute:
 
@@ -14,13 +14,13 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install filtr
+    $ gem install filter_factory
 
 ## Usage
 
 Describe your filter:
 
-    @filter = Filtr::Filter.create do
+    @filter = FilterFactory.create do
       # filter field definition: field name for ActiveRecord/Mongoid model, filter type
       field :title, :regex
       field :author, :eq

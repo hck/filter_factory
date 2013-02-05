@@ -1,6 +1,6 @@
 require 'active_model'
 
-module Filtr
+module FilterFactory
   class Filter
     include ActiveModel::Conversion
     extend ActiveModel::Naming
@@ -26,7 +26,7 @@ module Filtr
     end
 
     def filled_fields
-      fields.select{|f| !f.value.blank?}
+      fields.select{|f| !f.value.nil? && f.value != ''}
     end
 
     def persisted?

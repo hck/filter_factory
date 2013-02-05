@@ -7,19 +7,19 @@ require 'active_record'
 require 'database_cleaner'
 require 'factory_girl'
 
-require 'filtr'
+require 'filter_factory'
 
 Dir["#{MODELS}/*.rb"].each { |f| require f }
 
 Mongoid.configure do |config|
-  config.connect_to 'mongoid_filtr_test'
+  config.connect_to 'mongoid_filter_factory_test'
 end
 #Mongoid.logger = Logger.new($stdout)
 #Moped.logger = Logger.new($stdout)
 
 ActiveRecord::Base.establish_connection(
   adapter: "mysql2",
-  database: "active_record_filtr_test"
+  database: "active_record_filter_factory_test"
 )
 ActiveRecord::Base.connection.execute("DROP TABLE IF EXISTS ar_posts")
 ActiveRecord::Base.connection.create_table(:ar_posts) do |t|

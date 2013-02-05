@@ -1,9 +1,9 @@
-module Filtr
+module FilterFactory
   module ActiveRecord
     module Filter
       def filter(filter_object)
         conditions = filter_object.filled_fields.map do |field|
-          Filtr::ActiveRecord::Condition.new(field.name, field.value).method(field.condition)
+          FilterFactory::ActiveRecord::Condition.new(field.name, field.value).method(field.condition)
         end
 
         conditions.inject(nil) do |res,condition|
@@ -14,4 +14,4 @@ module Filtr
   end
 end
 
-ActiveRecord::Base.send(:extend, Filtr::ActiveRecord::Filter) if defined?(ActiveRecord::Base)
+ActiveRecord::Base.send(:extend, FilterFactory::ActiveRecord::Filter) if defined?(ActiveRecord::Base)

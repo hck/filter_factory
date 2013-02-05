@@ -1,6 +1,6 @@
-module Filtr
+module FilterFactory
   module Mongoid
-    class Condition < Filtr::Condition
+    class Condition < FilterFactory::Condition
       def eq(obj)
         obj.where(field_name => value)
       end

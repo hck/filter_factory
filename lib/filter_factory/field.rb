@@ -1,4 +1,4 @@
-module Filtr
+module FilterFactory
   class Field
     attr_reader :name, :condition, :options
     attr_accessor :value

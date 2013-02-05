@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Filtr::Filter do
+describe FilterFactory::Filter do
   it "should create filter and execute block" do
     test_fields = [[:field1, :eq], [:field2, :eq], [:field3, :eq]]
 

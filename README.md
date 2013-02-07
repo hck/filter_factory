@@ -25,6 +25,11 @@ Describe your filter:
       field :title, :regex
       field :author, :eq
       field :views, :gte
+
+      # add aliases for the same field with different conditions
+      field :created_at, :gte, alias: :created_at_gte
+      field :created_at, :lte, alias: :created_at_lte
+
       # ...
     end
 
@@ -45,6 +50,16 @@ Render form as you want in your view:
         <%= f.label :views %>
         <br/>
         <%= f.number_field :views %>
+    </div>
+    <div>
+        <%= f.label :created_at_gte %>
+        <br/>
+        <%= f.date_select :created_at_gte %>
+    </div>
+    <div>
+        <%= f.label :created_at_lte %>
+        <br/>
+        <%= f.date_select :created_at_lte %>
     </div>
     <div class="actions">
         <%= f.submit "Filter" %>

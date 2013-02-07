@@ -15,12 +15,20 @@ describe FilterFactory::Filter do
     filter.fields.map{|f| [f.name, f.condition]}.should == test_fields
   end
 
-  it "should define singleton method for defined field" do
+  it "should define singleton method for defined field by its name if no alias option specified" do
     filter = described_class.create do
       field :name, :eq
     end
 
     filter.should respond_to(:name, :'name=')
+  end
+
+  it "should define singleton method for defined field by its alias if alias option specified" do
+    filter = described_class.create do
+      field :name, :eq, alias: :my_name
+    end
+
+    filter.should respond_to(:my_name, :'my_name=')
   end
 
   it "should get field value" do
@@ -52,20 +60,20 @@ describe FilterFactory::Filter do
   it "should return valid attributes" do
     filter = described_class.create do
       field :name, :eq
-      field :surname, :regex
+      field :surname, :regex, alias: :last_name
     end
     filter.name = "test name"
 
-    filter.attributes.should == HashWithIndifferentAccess.new({name: "test name", surname: nil})
+    filter.attributes.should == HashWithIndifferentAccess.new({name: "test name", last_name: nil})
   end
 
   it "should fill filter values from hash" do
     filter = described_class.create do
       field :name, :eq
-      field :surname, :regex
+      field :surname, :regex, alias: :last_name
     end
 
-    attributes = {name: "my test name", surname: "surname here"}
+    attributes = {name: "my test name", last_name: "surname here"}
     filter.attributes = attributes
     filter.attributes.should == HashWithIndifferentAccess.new(attributes)
   end

@@ -12,14 +12,14 @@ describe ARPost do
   it "should execute filter methods chain" do
     filter = FilterFactory.create do
       field :title, :eq
-      field :author, :eq
+      field :author, :eq, alias: :user
       field :views, :gte
     end
 
     sample = @posts.sample
 
     filter.title = sample.title
-    filter.author = sample.author
+    filter.user = sample.author
 
     described_class.filter(filter).to_a.should == [sample]
   end

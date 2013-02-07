@@ -13,7 +13,7 @@ module FilterFactory
 
     def attributes
       @fields.inject(HashWithIndifferentAccess.new) do |acc,field|
-        acc[field.name] = field.value
+        acc[field.alias] = field.value
         acc
       end
     end
@@ -34,10 +34,10 @@ module FilterFactory
     end
 
     private
-    def field(name, condition)
-      Field.new(name, condition).tap do |field|
-        define_singleton_method(name){ field.value }
-        define_singleton_method("#{name}="){|val| field.value = val }
+    def field(name, condition, options={})
+      Field.new(name, condition, options).tap do |field|
+        define_singleton_method(field.alias){ field.value }
+        define_singleton_method("#{field.alias}="){|val| field.value = val }
 
         @fields << field
       end

@@ -33,7 +33,7 @@ Describe your filter:
       # ...
     end
 
-Render form as you want in your view:
+Render form as you want in your view (use aliases instead of field names if specified):
 
     <%= form_for @filter, as: :filter do |f| %>
     <div>

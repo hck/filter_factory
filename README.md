@@ -33,6 +33,18 @@ Describe your filter:
       # ...
     end
 
+Alternate way to create your filter:
+
+    @filter = FilterFactory.create do
+        # type filter type as method and field name as an argument
+        eq :author
+        gte :views
+
+        # supply options after field name
+        gte :created_at, alias: :created_at_gte
+        lte :created_at, alias: :created_at_lte
+    end
+
 Render form as you want in your view (use aliases instead of field names if specified):
 
     <%= form_for @filter, as: :filter do |f| %>

@@ -67,6 +67,43 @@ describe FilterFactory::Filter do
     filter.attributes.should == HashWithIndifferentAccess.new({name: "test name", last_name: nil})
   end
 
+  it "should raise error if duplicate field definition found" do
+    expect do
+      described_class.create do
+        field :name, :eq
+        field :surname, :regex, alias: :last_name
+        field :name, :eq, alias: :name
+      end
+    end.to raise_error(FilterFactory::Filter::DuplicateFieldError)
+  end
+
+  it "should respond to #get_field method" do
+    should respond_to(:get_field)
+  end
+
+  it "should return valid field by calling #get_field" do
+    filter = described_class.create do
+      field :name, :eq
+      field :surname, :regex, alias: :last_name
+    end
+    filter.get_field(:name).should be_instance_of(FilterFactory::Field)
+    filter.get_field(:name).condition.should == :eq
+    filter.get_field(:surname).should be_instance_of(FilterFactory::Field)
+    filter.get_field(:surname).condition.should == :regex
+    filter.get_field(:my_name).should be_nil
+  end
+
+  described_class::CONDITIONS.each do |condition|
+    it "should respond to #{condition} method" do
+      should respond_to(condition)
+    end
+
+    it "should define field with '#{condition}' condition" do
+      filter = described_class.create{ public_send(condition, :name) }
+      filter.get_field(:name).condition.should == condition
+    end
+  end
+
   it "should fill filter values from hash" do
     filter = described_class.create do
       field :name, :eq

@@ -58,7 +58,7 @@ module FilterFactory
     end
 
     class << self
-      def create &block
+      def create(&block)
         new.tap{|filter| filter.instance_eval &block}
       end
     end

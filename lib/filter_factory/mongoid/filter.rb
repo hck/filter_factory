@@ -7,7 +7,7 @@ module FilterFactory
         end
 
         conditions.inject(self) do |res,condition|
-          res = res.instance_eval(&condition)
+          res.instance_eval(&condition)
         end
       end
     end

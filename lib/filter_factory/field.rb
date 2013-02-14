@@ -7,7 +7,7 @@ module FilterFactory
       raise ArgumentError unless FilterFactory::Filter::CONDITIONS.include?(condition)
 
       valid_options = [:alias]
-      @name, @condition, @options = name, condition, options.reject{|k,v| !valid_options.include?(k)}
+      @name, @condition, @options = name, condition, options.reject{|k,| !valid_options.include?(k)}
       @alias = @options[:alias] || @name
     end
 

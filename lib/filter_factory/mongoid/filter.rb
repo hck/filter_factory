@@ -6,7 +6,7 @@ module FilterFactory
           FilterFactory::Mongoid::Condition.new(field.name, field.value).method(field.condition)
         end
 
-        conditions.inject(self) do |res,condition|
+        conditions.inject(self) do |res, condition|
           res.instance_eval(&condition)
         end
       end

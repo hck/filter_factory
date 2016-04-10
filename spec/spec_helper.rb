@@ -2,6 +2,7 @@ MODELS = File.join(File.dirname(__FILE__), 'models')
 
 require 'rubygems'
 
+require 'mysql2'
 require 'mongoid'
 require 'active_record'
 require 'database_cleaner'
@@ -16,19 +17,21 @@ Mongoid.configure do |config|
 end
 #Mongoid.logger = Logger.new($stdout)
 #Moped.logger = Logger.new($stdout)
+# create mysql database
+client = Mysql2::Client.new(host: '127.0.0.1', username: 'root', password: nil)
+client.query('CREATE DATABASE IF NOT EXISTS active_record_filter_factory_test')
+client.close
 
 ActiveRecord::Base.establish_connection(
-  adapter: "mysql2",
-  database: "active_record_filter_factory_test"
+  adapter: 'mysql2',
+  database: 'active_record_filter_factory_test'
 )
-ActiveRecord::Base.connection.execute("DROP TABLE IF EXISTS ar_posts")
+ActiveRecord::Base.connection.execute('DROP TABLE IF EXISTS ar_posts')
 ActiveRecord::Base.connection.create_table(:ar_posts) do |t|
   t.string :title
   t.string :author
   t.integer :views
 end
-#ActiveRecord::Base.logger = Logger.new($stdout)
-#ActiveRecord::Base.logger.level = Logger::DEBUG
 
 FactoryGirl.definition_file_paths = [File.join(File.dirname(__FILE__), 'factories')]
 FactoryGirl.find_definitions

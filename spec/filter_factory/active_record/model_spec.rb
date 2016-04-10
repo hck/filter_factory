@@ -1,157 +1,143 @@
-require "spec_helper"
+require 'spec_helper'
 
-describe ARPost do
-  before(:each) do
-    @posts = FactoryGirl.create_list(:active_record_post, 10)
+RSpec.describe ARPost do
+  let!(:posts) { posts = FactoryGirl.create_list(:active_record_post, 5) }
+
+  it 'responds to ::filter method' do
+    expect(described_class).to respond_to(:filter)
   end
 
-  it "should respond to ::filter method" do
-    described_class.should respond_to(:filter)
-  end
+  it 'executes filter methods chain' do
+    sample = posts.sample
 
-  it "should execute filter methods chain" do
     filter = FilterFactory.create do
-      field :title, :eq
-      field :author, :eq, alias: :user
-      field :views, :gte
+      eq :title
+      eq :author, alias: :user
+      gte :views
     end
-
-    sample = @posts.sample
 
     filter.title = sample.title
     filter.user = sample.author
 
-    described_class.filter(filter).to_a.should == [sample]
+    expect(described_class.filter(filter).to_a).to eq([sample])
   end
 
-  it "should return records with column' values equal to specified value" do
-    sample = @posts.sample
+  it 'returns records with column values equal to specified value' do
+    sample = posts.sample
 
-    filter = FilterFactory.create do
-      field :id,  :eq
-    end
+    filter = FilterFactory.create { eq :id }
     filter.id = sample.id
 
-    described_class.filter(filter).to_a.should == [sample]
+    expect(described_class.filter(filter).to_a).to eq([sample])
   end
 
-  it "should return records with column' values not equal specified value" do
-    sample = @posts.sample
+  it 'returns records with column values not equal specified value' do
+    sample = posts.sample
 
-    filter = FilterFactory.create do
-      field :id,  :ne
-    end
+    filter = FilterFactory.create { ne :id }
     filter.id = sample.id
 
-    described_class.filter(filter).to_a.sort.should == @posts.reject{|p| p.id == sample.id}
+    expected_result = posts.reject { |p| p.id == sample.id }
+    expect(described_class.filter(filter).to_a.sort).to eq(expected_result)
   end
 
-  it "should return records with column' values less than specified value" do
-    sample = @posts.sample
+  it 'returns records with column values less than specified value' do
+    sample = posts.sample
 
-    filter = FilterFactory.create do
-      field :views,  :lt
-    end
+    filter = FilterFactory.create { lt :views }
     filter.views = sample.views
 
-    described_class.filter(filter).map(&:id).sort.should == @posts.select{|p| p.views < sample.views}.map(&:id).sort
+    expected_result = posts.select { |p| p.views < sample.views }.map(&:id).sort
+    expect(described_class.filter(filter).map(&:id).sort).to eq(expected_result)
   end
 
-  it "should return records with column' values less than or equal to specified value" do
-    sample = @posts.sample
+  it 'returns records with column values less than or equal to specified value' do
+    sample = posts.sample
 
-    filter = FilterFactory.create do
-      field :views,  :lte
-    end
+    filter = FilterFactory.create { lte :views }
     filter.views = sample.views
 
-    described_class.filter(filter).map(&:id).sort.should == @posts.select{|p| p.views <= sample.views}.map(&:id).sort
+    expected_result = posts.select { |p| p.views <= sample.views }.map(&:id).sort
+    expect(described_class.filter(filter).map(&:id).sort).to eq(expected_result)
   end
 
-  it "should return records with column' values greater than specified value" do
-    sample = @posts.sample
+  it 'returns records with column values greater than specified value' do
+    sample = posts.sample
 
-    filter = FilterFactory.create do
-      field :views,  :gt
-    end
+    filter = FilterFactory.create { gt :views }
     filter.views = sample.views
 
-    described_class.filter(filter).map(&:id).sort.should == @posts.select{|p| p.views > sample.views}.map(&:id).sort
+    expected_result = posts.select { |p| p.views > sample.views }.map(&:id).sort
+    expect(described_class.filter(filter).map(&:id).sort).to eq(expected_result)
   end
 
-  it "should return records with column' values greater than or equal to specified value" do
-    sample = @posts.sample
+  it 'returns records with column values greater than or equal to specified value' do
+    sample = posts.sample
 
-    filter = FilterFactory.create do
-      field :views,  :gte
-    end
+    filter = FilterFactory.create { gte :views }
     filter.views = sample.views
 
-    described_class.filter(filter).map(&:id).sort.should == @posts.select{|p| p.views >= sample.views}.map(&:id).sort
+    expected_result = posts.select { |p| p.views >= sample.views }.map(&:id).sort
+    expect(described_class.filter(filter).map(&:id).sort).to eq(expected_result)
   end
 
-  it "should raise NotImplementedError if using 'all' condition" do
+  it 'raises NotImplementedError if using \'all\' condition' do
     filter = FilterFactory.create do
-      field :opts,  :all
+      field :opts, :all
     end
     filter.opts = [1, 2, 3, 4]
 
-    expect {described_class.filter(filter)}.to raise_error(NotImplementedError)
+    expect { described_class.filter(filter) }.to raise_error(NotImplementedError)
   end
 
-  it "should return records with column' values in specified values" do
-    sample = @posts.sample(3)
+  it 'returns records with column values in specified values' do
+    sample = posts.sample(3)
 
     filter = FilterFactory.create do
-      field :id,  :in
+      field :id, :in
     end
     filter.id = sample.map(&:id)
 
-    described_class.filter(filter).map(&:id).sort.should == sample.map(&:id).sort
+    expected_result = sample.map(&:id).sort
+    expect(described_class.filter(filter).map(&:id).sort).to eq(expected_result)
   end
 
-  it "should return records with column' values not in specified values" do
-    sample = @posts.sample(3)
+  it 'returns records with column values not in specified values' do
+    sample = posts.sample(3)
 
-    filter = FilterFactory.create do
-      field :id,  :nin
-    end
+    filter = FilterFactory.create { nin :id }
     filter.id = sample.map(&:id)
 
-    described_class.filter(filter).map(&:id).sort.should == (@posts.map(&:id) - sample.map(&:id)).sort
+    expected_result = (posts.map(&:id) - sample.map(&:id)).sort
+    expect(described_class.filter(filter).map(&:id).sort).to eq(expected_result)
   end
 
-  it "should return records with column' values which match the specified regexp" do
-    sample = @posts.sample(3)
-    sample.each_with_index{|r,i| r.update_attribute(:title, "my_title_#{i}")}
+  it 'returns records with column values which match the specified regexp' do
+    sample = posts.sample(3)
+    sample.each_with_index { |r, i| r.update_attribute(:title, "my_title_#{i}") }
 
-    filter = FilterFactory.create do
-      field :title,  :regex
-    end
-
+    filter = FilterFactory.create { regex :title }
     filter.title = '_title_'
 
-    described_class.filter(filter).map(&:id).sort.should == sample.map(&:id).sort
+    expected_result = sample.map(&:id).sort
+    expect(described_class.filter(filter).map(&:id).sort).to eq(expected_result)
   end
 
-  it "should raise NotImplementedError if using 'exists' condition" do
-    filter = FilterFactory.create do
-      field :not_exists, :exists
-    end
+  it 'raises NotImplementedError if using \'exists\' condition' do
+    filter = FilterFactory.create { exists :not_exists }
     filter.not_exists = true
 
-    expect {described_class.filter(filter)}.to raise_error(NotImplementedError)
+    expect { described_class.filter(filter) }.to raise_error(NotImplementedError)
   end
 
-  it "should return records with column' values not nil equal to specified value" do
-    sample = @posts.sample(3)
-    sample.each{|r| r.update_attribute(:title, nil)}
+  it 'returns records with column values not nil equal to specified value' do
+    sample = posts.sample(3)
+    sample.each { |r| r.update_attribute(:title, nil) }
 
-    filter = FilterFactory.create do
-      field :title,  :presents
-    end
+    filter = FilterFactory.create { presents :title }
     filter.title = false
 
-    described_class.filter(filter).map(&:id).sort.should == sample.map(&:id).sort
+    expected_result = sample.map(&:id).sort
+    expect(described_class.filter(filter).map(&:id).sort).to eq(expected_result)
   end
 end

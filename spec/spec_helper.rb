@@ -5,7 +5,6 @@ require 'rubygems'
 require 'mysql2'
 require 'mongoid'
 require 'active_record'
-require 'database_cleaner'
 require 'factory_girl'
 
 require 'filter_factory'
@@ -41,21 +40,8 @@ FactoryGirl.find_definitions
 RSpec.configure do |config|
   config.mock_with :rspec
 
-  config.before(:suite) do
-    mongoid = DatabaseCleaner[:mongoid]
-    mongoid.strategy = :truncation
-    mongoid.clean_with(:truncation)
-
-    active_record = DatabaseCleaner[:active_record]
-    active_record.strategy = :truncation
-    active_record.clean_with(:truncation)
-  end
-
-  config.before(:each) do
-    DatabaseCleaner.start
-  end
-
   config.after(:each) do
-    DatabaseCleaner.clean
+    ARPost.delete_all
+    MPost.delete_all
   end
 end

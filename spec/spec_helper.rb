@@ -16,8 +16,9 @@ require 'models/m_post'
 Mongoid.configure do |config|
   config.connect_to 'mongoid_filter_factory_test'
 end
-#Mongoid.logger = Logger.new($stdout)
-#Moped.logger = Logger.new($stdout)
+Mongoid.logger.level = Logger::ERROR
+Mongo::Logger.logger.level = Logger::ERROR
+
 # create mysql database
 client = Mysql2::Client.new(host: '127.0.0.1', username: 'root', password: nil)
 client.query('CREATE DATABASE IF NOT EXISTS active_record_filter_factory_test')

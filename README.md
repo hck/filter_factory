@@ -1,5 +1,7 @@
 # FilterFactory
 
+[![Build Status](https://travis-ci.org/hck/filter_factory.png)](https://travis-ci.org/hck/filter_factory)
+
 FilterFactory allows you to easily fetch ActiveRecord/Mongoid models that match specified filters.
 
 ## Installation

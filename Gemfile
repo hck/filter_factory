@@ -3,10 +3,10 @@ source 'https://rubygems.org'
 # Specify your gem's dependencies in filter_factory.gemspec
 gemspec
 
-gem 'rails', '>= 3.0'
+gem 'rails', '>= 4.0'
 
 group :development do
-  gem 'mongoid', '>= 3.0'
+  gem 'mongoid', '>= 5.0'
   gem 'mysql2'
 end
 

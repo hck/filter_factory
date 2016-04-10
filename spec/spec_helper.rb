@@ -27,6 +27,8 @@ ActiveRecord::Base.establish_connection(
   adapter: 'mysql2',
   database: 'active_record_filter_factory_test'
 )
+
+# create mysql table if not exists
 ActiveRecord::Base.connection.execute('DROP TABLE IF EXISTS ar_posts')
 ActiveRecord::Base.connection.create_table(:ar_posts) do |t|
   t.string :title

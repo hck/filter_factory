@@ -40,7 +40,6 @@ FactoryGirl.find_definitions
 
 RSpec.configure do |config|
   config.mock_with :rspec
-  config.color_enabled = true
 
   config.before(:suite) do
     mongoid = DatabaseCleaner[:mongoid]

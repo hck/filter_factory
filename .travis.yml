@@ -1,0 +1,7 @@
+language: ruby
+rvm:
+  - "2.3.0"
+services:
+  - mongodb
+  - mysql
+script: bundle exec rspec spec

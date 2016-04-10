@@ -10,7 +10,8 @@ require 'factory_girl'
 
 require 'filter_factory'
 
-Dir["#{MODELS}/*.rb"].each { |f| require f }
+require 'models/ar_post'
+require 'models/m_post'
 
 Mongoid.configure do |config|
   config.connect_to 'mongoid_filter_factory_test'

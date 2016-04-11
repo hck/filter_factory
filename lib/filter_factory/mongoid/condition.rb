@@ -46,13 +46,8 @@ module FilterFactory
       end
 
       def presents(obj)
-        query_opts = if ['true', '1', 1].include?(value)
-          { field_name => { '$nin' => [nil, '', []] } }
-        else
-          { field_name => { '$in' => [nil, '', []] } }
-        end
-
-        obj.where(query_opts)
+        operator = ['true', '1', 1].include?(value) ? '$nin' : '$in'
+        obj.where(field_name => { operator => [nil, '', []] })
       end
     end
   end

@@ -25,7 +25,7 @@ module FilterFactory
         obj.where("#{field_name} >= ?", value)
       end
 
-      def all(obj)
+      def all(_obj)
         fail NotImplementedError, "all operator is not available for ActiveRecord"
       end
 
@@ -41,7 +41,7 @@ module FilterFactory
         obj.where("#{field_name} REGEXP ?", value)
       end
 
-      def exists(obj)
+      def exists(_obj)
         fail NotImplementedError, "exists operator is not available for ActiveRecord"
       end
 

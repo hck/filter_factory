@@ -4,7 +4,7 @@ module FilterFactory
     attr_accessor :value
 
     def initialize(name, condition, options = {})
-      raise ArgumentError unless FilterFactory::Filter::CONDITIONS.include?(condition)
+      fail ArgumentError unless FilterFactory::Filter::CONDITIONS.include?(condition)
 
       valid_options = [:alias]
       @name, @condition, @options = name, condition, options.reject{|k,| !valid_options.include?(k)}

@@ -1,6 +1,6 @@
 # FilterFactory
 
-[![Build Status](https://travis-ci.org/hck/filter_factory.png)](https://travis-ci.org/hck/filter_factory)
+[![Build Status](https://travis-ci.org/hck/filter_factory.png)](https://travis-ci.org/hck/filter_factory) [![Code Climate](https://codeclimate.com/github/hck/filter_factory/badges/gpa.svg)](https://codeclimate.com/github/hck/filter_factory)
 
 FilterFactory allows you to easily fetch ActiveRecord/Mongoid models that match specified filters.
 

@@ -6,7 +6,7 @@ module FilterFactory
           FilterFactory::ActiveRecord::Condition.new(field.name, field.value).method(field.condition)
         end
 
-        conditions.inject(nil) do |res,condition|
+        conditions.inject(nil) do |res, condition|
           res ? res.instance_eval(&condition) : instance_eval(&condition)
         end
       end

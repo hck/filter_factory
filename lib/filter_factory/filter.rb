@@ -18,7 +18,7 @@ module FilterFactory
     #
     # @return [HashWithIndifferentAccess]
     def attributes
-      @fields.inject(HashWithIndifferentAccess.new) do |acc, field|
+      fields.inject(HashWithIndifferentAccess.new) do |acc, field|
         acc[field.alias] = field.value
         acc
       end
@@ -80,7 +80,7 @@ module FilterFactory
 
     private
 
-    def field(name, condition, options={})
+    def field(name, condition, options = {})
       Field.new(name, condition, options).tap do |field|
         fail DuplicateFieldError if fields.include?(field)
 

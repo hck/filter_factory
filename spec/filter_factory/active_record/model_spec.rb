@@ -22,6 +22,17 @@ RSpec.describe ARPost do
     expect(described_class.filter(filter).to_a).to eq([sample])
   end
 
+  it 'applies filter to existing relation' do
+    rel = described_class.where('views < ?', posts.last.views)
+
+    filter = FilterFactory.create do
+      gt :views
+    end
+    filter.views = 0
+
+    expect(rel.filter(filter).to_a).to eq(posts[0..-2])
+  end
+
   it 'returns records with column values equal to specified value' do
     sample = posts.sample
 

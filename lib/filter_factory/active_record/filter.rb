@@ -20,4 +20,6 @@ module FilterFactory
   end
 end
 
-ActiveRecord::Base.send(:extend, FilterFactory::ActiveRecord::Filter) if defined?(ActiveRecord::Base)
+if defined?(ActiveRecord::Base)
+  ActiveRecord::Base.send(:extend, FilterFactory::ActiveRecord::Filter)
+end

@@ -1,6 +1,10 @@
 module FilterFactory
   module Mongoid
     module Filter
+      # Applies the filter passed as an argument to model class or Mongoid::Criteria
+      #
+      # @param [Filter] filter_object filter object used to filter records
+      # @return [Mongoid::Criteria]
       def filter(filter_object)
         conditions = filter_object.filled_fields.map do |field|
           FilterFactory::Mongoid::Condition.new(field.name, field.value).method(field.condition)

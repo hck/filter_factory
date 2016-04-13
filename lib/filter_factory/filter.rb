@@ -1,4 +1,5 @@
 require 'active_model'
+require 'active_support/hash_with_indifferent_access'
 
 module FilterFactory
   class Filter

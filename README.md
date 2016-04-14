@@ -41,6 +41,7 @@ Alternate way to create your filter:
         # type filter type as method and field name as an argument
         eq :author
         gte :views
+        is_in :entry_type
 
         # supply options after field name
         gte :created_at, alias: :created_at_gte

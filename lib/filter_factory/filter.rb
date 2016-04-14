@@ -60,7 +60,7 @@ module FilterFactory
     end
 
     CONDITIONS.each do |condition|
-      define_method condition do |name, options={}|
+      define_method(condition) do |name, options = {}|
         field(name, condition, options)
       end
     end

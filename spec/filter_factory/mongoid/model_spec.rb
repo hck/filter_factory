@@ -96,7 +96,7 @@ RSpec.describe MPost do
     sample = posts.sample(3)
 
     filter = FilterFactory.create do
-      field :id, :in
+      is_in :id
     end
     filter.id = sample.map(&:id)
 
@@ -107,7 +107,7 @@ RSpec.describe MPost do
   it 'returns records with column values not in specified values' do
     sample = posts.sample(3)
 
-    filter = FilterFactory.create { nin :id }
+    filter = FilterFactory.create { not_in :id }
     filter.id = sample.map(&:id)
 
     expected_result = (posts.map(&:id) - sample.map(&:id)).sort

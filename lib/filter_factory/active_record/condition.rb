@@ -29,11 +29,11 @@ module FilterFactory
         fail NotImplementedError, "all operator is not available for ActiveRecord"
       end
 
-      def in(obj)
+      def is_in(obj)
         obj.where("#{field_name} IN (?)", value)
       end
 
-      def nin(obj)
+      def not_in(obj)
         obj.where("#{field_name} NOT IN (?)", value)
       end
 

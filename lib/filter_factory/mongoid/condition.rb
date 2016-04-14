@@ -29,11 +29,11 @@ module FilterFactory
         obj.where(field_name => { '$all' => value })
       end
 
-      def in(obj)
+      def is_in(obj)
         obj.where(field_name => { '$in' => value })
       end
 
-      def nin(obj)
+      def not_in(obj)
         obj.where(field_name => { '$nin' => value })
       end
 

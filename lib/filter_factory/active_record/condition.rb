@@ -38,7 +38,7 @@ module FilterFactory
       end
 
       def regex(obj)
-        obj.where("#{field_name} REGEXP ?", value)
+        obj.where("#{field_name} REGEXP ?", Regexp.escape(value))
       end
 
       def exists(_obj)

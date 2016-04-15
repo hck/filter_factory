@@ -26,7 +26,7 @@ module FilterFactory
       end
 
       def all(_obj)
-        fail NotImplementedError, "all operator is not available for ActiveRecord"
+        fail NotImplementedError, 'all operator is not available for ActiveRecord'
       end
 
       def is_in(obj)
@@ -42,7 +42,7 @@ module FilterFactory
       end
 
       def exists(_obj)
-        fail NotImplementedError, "exists operator is not available for ActiveRecord"
+        fail NotImplementedError, 'exists operator is not available for ActiveRecord'
       end
 
       def presents(obj)

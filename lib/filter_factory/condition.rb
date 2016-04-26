@@ -17,7 +17,7 @@ module FilterFactory
     #
     # @param [Object] _obj
     def eq(_obj)
-      fail NotImplementedError
+      raise NotImplementedError
     end
 
     # Adds condition to fetch filtered entries where field value is not equal
@@ -26,7 +26,7 @@ module FilterFactory
     #
     # @param [Object] _obj
     def ne(_obj)
-      fail NotImplementedError
+      raise NotImplementedError
     end
 
     # Adds condition to fetch filtered entries where field value is less than
@@ -34,7 +34,7 @@ module FilterFactory
     #
     # @param [Object] _obj
     def lt(_obj)
-      fail NotImplementedError
+      raise NotImplementedError
     end
 
     # Adds condition to fetch filtered entries where field value is less than
@@ -42,7 +42,7 @@ module FilterFactory
     #
     # @param [Object] _obj
     def lte(_obj)
-      fail NotImplementedError
+      raise NotImplementedError
     end
 
     # Adds condition to fetch filtered entries where field value is greater than
@@ -50,7 +50,7 @@ module FilterFactory
     #
     # @param [Object] _obj
     def gt(_obj)
-      fail NotImplementedError
+      raise NotImplementedError
     end
 
     # Adds condition to fetch filtered entries where field value is greater than
@@ -59,7 +59,7 @@ module FilterFactory
     #
     # @param [Object] _obj
     def gte(_obj)
-      fail NotImplementedError
+      raise NotImplementedError
     end
 
     # Adds condition to fetch filtered entries where field value is an array
@@ -69,7 +69,7 @@ module FilterFactory
     #
     # @param [Object] _obj
     def all(_obj)
-      fail NotImplementedError
+      raise NotImplementedError
     end
 
     # Adds condition to fetch filtered entries where field value is in the list.
@@ -77,7 +77,7 @@ module FilterFactory
     #
     # @param [Object] _obj
     def is_in(_obj)
-      fail NotImplementedError
+      raise NotImplementedError
     end
 
     # Adds condition to fetch filtered entries where field value is not in the list.
@@ -85,7 +85,7 @@ module FilterFactory
     #
     # @param [Object] _obj
     def not_in(_obj)
-      fail NotImplementedError
+      raise NotImplementedError
     end
 
     # Adds condition to fetch filtered entries where field value is matched
@@ -94,7 +94,7 @@ module FilterFactory
     #
     # @param [Object] _obj
     def regex(_obj)
-      fail NotImplementedError
+      raise NotImplementedError
     end
 
     # Adds condition to fetch filtered entries where particular field exists.
@@ -102,7 +102,7 @@ module FilterFactory
     #
     # @param [Object] _obj
     def exists(_obj)
-      fail NotImplementedError
+      raise NotImplementedError
     end
 
     # Adds condition to fetch filtered entries.
@@ -110,7 +110,7 @@ module FilterFactory
     #
     # @param [Object] _obj
     def presents(_obj)
-      fail NotImplementedError
+      raise NotImplementedError
     end
   end
 end

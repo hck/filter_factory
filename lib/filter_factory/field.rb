@@ -10,7 +10,7 @@ module FilterFactory
     # @param [Hash] options
     # @option options [Symbol, String] :alias field alias
     def initialize(name, condition, options = {})
-      fail ArgumentError unless FilterFactory::Filter::CONDITIONS.include?(condition)
+      raise ArgumentError unless FilterFactory::Filter::CONDITIONS.include?(condition)
 
       valid_options = [:alias]
       @name = name

@@ -83,7 +83,7 @@ module FilterFactory
 
     def field(name, condition, options = {})
       Field.new(name, condition, options).tap do |field|
-        fail DuplicateFieldError if fields.include?(field)
+        raise DuplicateFieldError if fields.include?(field)
 
         define_singleton_method(field.alias) { field.value }
         define_singleton_method("#{field.alias}=") { |val| field.value = val }

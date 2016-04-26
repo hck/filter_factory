@@ -25,10 +25,11 @@ module FilterFactory
     #
     # @param [Object] obj object to compare with
     # @return [Boolean]
-    def ==(obj)
-      return false unless obj.is_a?(self.class)
+    def ==(other)
+      return false unless other.is_a?(self.class)
+
       [:name, :condition, :alias].inject(true) do |acc, attr|
-        acc && public_send(attr) == obj.public_send(attr)
+        acc && public_send(attr) == other.public_send(attr)
       end
     end
   end

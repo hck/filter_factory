@@ -19,9 +19,8 @@ module FilterFactory
     #
     # @return [HashWithIndifferentAccess]
     def attributes
-      fields.inject(HashWithIndifferentAccess.new) do |acc, field|
+      fields.each_with_object(HashWithIndifferentAccess.new) do |field, acc|
         acc[field.alias] = field.value
-        acc
       end
     end
 
@@ -76,7 +75,7 @@ module FilterFactory
     end
 
     # Error class which represents error when filter already has the same field defined.
-    class DuplicateFieldError < StandardError;
+    class DuplicateFieldError < StandardError
     end
 
     private

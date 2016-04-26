@@ -10,7 +10,7 @@ module FilterFactory
           FilterFactory::ActiveRecord::Condition.new(field.name, field.value).method(field.condition)
         end
 
-        relation = self.is_a?(::ActiveRecord::Relation) ? self : nil
+        relation = is_a?(::ActiveRecord::Relation) ? self : nil
 
         conditions.inject(relation) do |res, condition|
           res ? res.instance_eval(&condition) : instance_eval(&condition)

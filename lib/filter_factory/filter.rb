@@ -8,7 +8,10 @@ module FilterFactory
 
     attr_reader :fields
 
-    CONDITIONS = [:eq, :ne, :lt, :lte, :gt, :gte, :all, :is_in, :not_in, :regex, :exists, :presents].freeze
+    CONDITIONS = [
+      :eq, :ne, :lt, :lte, :gt, :gte, :all,
+      :is_in, :not_in, :regex, :exists, :presents
+    ].freeze
 
     # Initializes new instance of Filter class.
     def initialize

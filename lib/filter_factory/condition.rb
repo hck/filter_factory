@@ -7,7 +7,8 @@ module FilterFactory
     # @param [Symbol] field_name field name which will be used in condition
     # @param [Object] value value which will be used in condition
     def initialize(field_name, value)
-      @field_name, @value = field_name, value
+      @field_name = field_name
+      @value = value
     end
 
     # Adds condition to fetch filtered entries where field value is equal to

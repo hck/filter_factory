@@ -6,12 +6,10 @@ RSpec.describe FilterFactory::Filter do
       test_fields = [[:field1, :eq], [:field2, :eq], [:field3, :eq]]
 
       filter = described_class.create do
-        test_fields.each do |arr|
-          field *arr
-        end
+        test_fields.each { |arr| field(*arr) }
       end
 
-      expect(filter.fields.map {|f| [f.name, f.condition]}).to eq(test_fields)
+      expect(filter.fields.map { |f| [f.name, f.condition] }).to eq(test_fields)
     end
 
     it 'defines singleton method for defined field by its name if no alias option specified' do
@@ -31,13 +29,15 @@ RSpec.describe FilterFactory::Filter do
     end
 
     it 'raises error if duplicate field definition found' do
-      expect {
+      block = lambda do
         described_class.create do
           field :name, :eq
           field :surname, :regex, alias: :last_name
           field :name, :eq, alias: :name
         end
-      }.to raise_error(FilterFactory::Filter::DuplicateFieldError)
+      end
+
+      expect(&block).to raise_error(FilterFactory::Filter::DuplicateFieldError)
     end
   end
 
@@ -121,7 +121,7 @@ RSpec.describe FilterFactory::Filter do
     end
 
     it "defines field with '#{condition}' condition" do
-      filter = described_class.create{ public_send(condition, :name) }
+      filter = described_class.create { public_send(condition, :name) }
       expect(filter.get_field(:name).condition).to eq(condition)
     end
   end

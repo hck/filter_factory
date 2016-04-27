@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe ARPost do
-  let!(:posts) { posts = FactoryGirl.create_list(:active_record_post, 5) }
+  let!(:posts) { FactoryGirl.create_list(:active_record_post, 5) }
 
   it 'responds to ::filter method' do
     expect(described_class).to respond_to(:filter)

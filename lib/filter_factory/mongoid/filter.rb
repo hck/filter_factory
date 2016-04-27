@@ -1,5 +1,6 @@
 module FilterFactory
   module Mongoid
+    # Filter module for MongoId to build relation for specified conditions
     module Filter
       # Applies the filter passed as an argument to model class or Mongoid::Criteria
       #

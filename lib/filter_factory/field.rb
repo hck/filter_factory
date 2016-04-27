@@ -1,4 +1,5 @@
 module FilterFactory
+  # Class for difining filter condition for a particular field
   class Field
     attr_reader :name, :condition, :alias, :options
     attr_accessor :value

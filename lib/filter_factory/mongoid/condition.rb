@@ -1,5 +1,6 @@
 module FilterFactory
   module Mongoid
+    # Implementation of filtering conditions for MongoId
     class Condition < FilterFactory::Condition
       def eq(obj)
         obj.where(field_name => value)

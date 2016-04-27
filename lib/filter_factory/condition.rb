@@ -1,4 +1,5 @@
 module FilterFactory
+  # Base condition class without implementation of condition methods
   class Condition
     attr_reader :field_name, :value
 

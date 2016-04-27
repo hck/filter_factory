@@ -1,5 +1,6 @@
 module FilterFactory
   module ActiveRecord
+    # Implementation of filtering conditions for ActiveRecord
     class Condition < FilterFactory::Condition
       def eq(obj)
         obj.where(field_name => value)

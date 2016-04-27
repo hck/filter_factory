@@ -2,6 +2,7 @@ require 'active_model'
 require 'active_support/hash_with_indifferent_access'
 
 module FilterFactory
+  # Filter class responsible for defining filtering conditions and setting filtering values
   class Filter
     include ActiveModel::Conversion
     extend ActiveModel::Naming
